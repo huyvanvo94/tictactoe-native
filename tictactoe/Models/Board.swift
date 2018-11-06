@@ -15,11 +15,11 @@ class Board {
     private var move: Int
     private let size: Int
     
-    var state: CellState
+    private var cellState: CellState
     
     init(size:Int = 3) {
         self.size = size
-        self.state = .x
+        self.cellState = .x
         self.move = 0
         self.matrix = Array(repeating: Array(repeating: .none,
                                              count: size),
@@ -28,7 +28,7 @@ class Board {
     
     func reset(){
         self.boardState = .nowinner
-        self.state = .x
+        self.cellState = .x
         self.move = 0
         self.matrix = Array(repeating: Array(repeating: .none,
                                              count: size),
@@ -38,28 +38,28 @@ class Board {
     func set(at x: Int, _ y :Int, completion: (BoardState, CellState) -> ()){
         
         
-        if state == .none || self.matrix[x][y] != .none{
+        if cellState == .none || self.matrix[x][y] != .none{
             return
         }
         move += 1
         
-        self.matrix[x][y] = state
+        self.matrix[x][y] = cellState
         
-        if winner(x: x, y: y, state: state) {
+        if winner(x: x, y: y, state: cellState) {
        
             self.boardState = .winner
-            completion(boardState, state)
-            self.state = .none
+            completion(boardState, cellState)
+            self.cellState = .none
             
         }
         else if self.move == self.size * self.size{
             boardState = .draw
-            completion(boardState, state)
-            self.state = .none 
+            completion(boardState, cellState)
+            self.cellState = .none 
         }
         
         else{
-            completion(boardState, state)
+            completion(boardState, cellState)
             next()
         }
         
@@ -120,11 +120,11 @@ class Board {
     
    
     
-    func next() { 
-        if state == .x {
-            state = .o
+    private func next() { 
+        if cellState == .x {
+            cellState = .o
         }else{
-            state = .x
+            cellState = .x
         }
     }
   

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-
-/* Define data model */
-enum CellState: String {
+ 
+enum CellState {
     
-    case x = "x"
-    case o = "o"
-    case none = "n"
+    case x
+    case o
+    case none
 }

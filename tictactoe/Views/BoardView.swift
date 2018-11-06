@@ -30,14 +30,18 @@ class BoardView: UIView {
         
     }
     
-    func drawLine(to: CGPoint, end: CGPoint){
+    func drawLine(frm: CGPoint, to: CGPoint){
         let path = UIBezierPath()
-        path.move(to: to)
-        path.addLine(to: end)
+        path.move(to: frm)
+        path.addLine(to: to)
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.strokeColor = UIColor.black.cgColor
+       
+        shapeLayer.strokeColor = UIColor(red: 27/255.0,
+                                         green: 155/255.0,
+                                         blue: 102.0/255,
+                                         alpha: 1).cgColor
         shapeLayer.lineWidth = 4
         self.layer.addSublayer(shapeLayer)
 

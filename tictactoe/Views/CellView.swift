@@ -11,9 +11,7 @@ import UIKit
 
 class CellView: UIView {
     
- 
-    
-    let tagId = 1
+    private let tagID = 1
  
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,30 +24,22 @@ class CellView: UIView {
     }
     
     func didLoad(){
-        self.backgroundColor = .white
+        self.backgroundColor = self.superview?.backgroundColor
     }
     
-    func draw(color: UIColor){
-        self.backgroundColor = color 
-    }
+ 
     
     override func addSubview(_ view: UIView) {
-
-        
-        print("i am called ")
+ 
         self.reset()
 
-        view.tag = tagId
+        view.tag = self.tagID
         super.addSubview(view)
-    } 
-    
-   
+    }
     
     func reset(){ 
-        //guard let piece = self.piece else { return }
-      //  piece.doRemoveFromSuperView()
-        
-        if let v = self.viewWithTag(tagId){
+   
+        if let v = self.viewWithTag(tagID){
             v.removeFromSuperview()
         }
  

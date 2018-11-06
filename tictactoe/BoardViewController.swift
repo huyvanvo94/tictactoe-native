@@ -77,9 +77,9 @@ class BoardViewController: UIViewController {
         
         for y in stride(from: cHeight, through: boardView.frame.height - cHeight, by: cHeight) {
             
-            self.boardView.drawLine(to: CGPoint(x: 0, y: y), end: CGPoint(x: self.boardView.frame.width, y: y))
+            self.boardView.drawLine(frm: CGPoint(x: 0, y: y), to: CGPoint(x: self.boardView.frame.width, y: y))
             
-            self.boardView.drawLine(to: CGPoint(x: y, y: 0), end:
+            self.boardView.drawLine(frm: CGPoint(x: y, y: 0), to:
             
                 CGPoint(x: y, y: self.boardView.frame.height))
         }
@@ -113,9 +113,9 @@ class BoardViewController: UIViewController {
         let x = pos.0
         let y = pos.1
           
-        self.board.set(at: x, y) { boardState, state in
+        self.board.set(at: x, y) { boardState, cellState in
             
-            if state == .x {
+            if cellState == .x {
                 let n: CGFloat = 20
                 
                 let xPiece = XPiece(frame: CGRect(x: n,
@@ -144,7 +144,7 @@ class BoardViewController: UIViewController {
             if boardState == .winner {
                 
                 let msg: String
-                if state == .x { msg = "Player one wins" } else{  msg = "Player two wins" }
+                if cellState == .x { msg = "Player one wins" } else{  msg = "Player two wins" }
                 
                 
                 let alert = UIAlertController(title: "Winner",

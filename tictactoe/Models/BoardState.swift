@@ -7,8 +7,7 @@
 //
 
 import Foundation
-
-
+ 
 enum BoardState{
     case draw
     case winner 
