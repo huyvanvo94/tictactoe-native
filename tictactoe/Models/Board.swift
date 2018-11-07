@@ -51,13 +51,12 @@ class Board {
             completion(boardState, cellState)
             self.cellState = .none
             
-        }
+        } // check if board is fulled up
         else if self.move == self.size * self.size{
             boardState = .draw
             completion(boardState, cellState)
             self.cellState = .none 
         }
-        
         else{
             completion(boardState, cellState)
             next()
@@ -67,6 +66,7 @@ class Board {
     
     private func winner(x: Int, y: Int, state: CellState) -> Bool{
         
+        // check column
         for i in 0 ..< self.size {
             if self.matrix[x][i] != state {
                 break
@@ -76,7 +76,7 @@ class Board {
                 return true
             }
         }
-        
+        // check row
         for i in 0 ..< size {
             
             if self.matrix[i][y] != state{
@@ -87,7 +87,7 @@ class Board {
                 return true
             }
         }
-        
+        // check diagonal
         if x == y {
             for i in 0 ..< size {
                 if self.matrix[i][i] != state {
