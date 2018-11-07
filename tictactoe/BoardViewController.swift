@@ -193,19 +193,6 @@ class BoardViewController: UIViewController {
         } 
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.orientation.isLandscape {
-       
-            boardView.frame.origin.y = 0 
-          // boardView.center = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height/2)
-            
-        } else {
-            
-            
-           
-        }
-    }
 }
 
 struct Position: Hashable {
