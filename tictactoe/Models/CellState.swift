@@ -7,7 +7,7 @@
 //
 
 import Foundation
- 
+
 enum CellState {
     
     case x

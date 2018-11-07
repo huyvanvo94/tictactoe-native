@@ -14,7 +14,7 @@ class Board {
     private var matrix: [[CellState]]
     private var move: Int
     private let size: Int
-    
+    // This variable keep tracks of which turn it is 
     private var cellState: CellState
     
     init(size:Int = 3) {

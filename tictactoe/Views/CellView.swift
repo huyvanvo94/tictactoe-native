@@ -8,7 +8,9 @@
 
 import UIKit
  
-
+/*
+ Cell is each cell in a NxN tic tac toe game.
+ */
 class CellView: UIView {
     
     private let tagID = 1
@@ -28,14 +30,16 @@ class CellView: UIView {
     }
     
  
-    
+    // The side effect of this function makes sure
+    // that each cell only has one piece at a time.
     override func addSubview(_ view: UIView) {
- 
+        
         self.reset()
 
         view.tag = self.tagID
         super.addSubview(view)
     }
+    
     
     func reset(){ 
    

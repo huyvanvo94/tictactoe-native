@@ -13,6 +13,10 @@ let n = 3
 class BoardViewController: UIViewController {
     
     let board = Board(size: n)
+    
+    // Each cell view can be mapped into a 2d array
+    // The key is the (x, y) of the cell view
+    // The value is the (x,y) of the 2d array in board model
     var mapper: [Position: (Int, Int)] = [:]
     let boardView: BoardView = {
         
@@ -32,11 +36,18 @@ class BoardViewController: UIViewController {
     }
     
     func buildUI(){
-        let startButton = UIButton(frame: CGRect(x: self.view.frame.width/2 - 50, y: 50, width: 100, height: 30))
-        startButton.backgroundColor = UIColor(red: 39/255.0, green: 174/255.0, blue: 96/255.0, alpha: 1.0)
-        startButton.setTitle("New Game", for: .normal)
-        startButton.addTarget(self, action: #selector(self.startButtonDidPressed(sender:)), for: .touchUpInside)
-        self.view.addSubview(startButton)
+        
+        let startBtn: UIButton = {
+            let button = UIButton(frame: CGRect(x: self.view.frame.width/2 - 50, y: 50, width: 100, height: 30))
+            button.backgroundColor = UIColor(red: 39/255.0, green: 174/255.0, blue: 96/255.0, alpha: 1.0)
+            button.setTitle("New Game", for: .normal)
+            button.addTarget(self, action: #selector(self.startButtonDidPressed(sender:)), for: .touchUpInside)
+          
+            return button
+            
+        }()
+     
+        self.view.addSubview(startBtn)
         
         // create board
         let width = self.boardView.frame.height
@@ -47,7 +58,7 @@ class BoardViewController: UIViewController {
         
         var x: CGFloat = 0
         var y: CGFloat = 0
-        
+        // Draw the cells and map to dictionary
         for i in 0 ..< n{
             
             for j in 0 ..< n {
@@ -64,9 +75,7 @@ class BoardViewController: UIViewController {
                 let p = Position(x: frame.origin.x, y: frame.origin.y)
                 
                 self.mapper[p] = (i, j)
-                
-                // change x and y values
-                
+             
                 x = x + cWidth
             }
             
@@ -74,7 +83,7 @@ class BoardViewController: UIViewController {
             y = y + cHeight
         }
 
-        
+        // Draw horizontal and vertical boarders
         for y in stride(from: cHeight, through: boardView.frame.height - cHeight, by: cHeight) {
             
             self.boardView.drawLine(frm: CGPoint(x: 0, y: y), to: CGPoint(x: self.boardView.frame.width, y: y))
@@ -105,6 +114,7 @@ class BoardViewController: UIViewController {
       
      
         let view = gestureRecognizer.view
+    
         let loc = gestureRecognizer.location(in: view)
         guard let cellView = view?.hitTest(loc, with: nil) as? CellView,
               let pos = mapper[Position(x: cellView.frame.origin.x, y: cellView.frame.origin.y)]
@@ -143,8 +153,7 @@ class BoardViewController: UIViewController {
             
             if boardState == .winner {
                 
-                let msg: String
-                if cellState == .x { msg = "Player one wins" } else{  msg = "Player two wins" }
+                let msg: String = (cellState == .x) ? ( "Player one wins" )  : ( "Player two wins" )
                 
                 
                 let alert = UIAlertController(title: "Winner",
@@ -165,7 +174,7 @@ class BoardViewController: UIViewController {
             }
             
             if boardState == .draw{
-                let msg: String = "draw"
+                let msg = "draw"
                 
                 let alert = UIAlertController(title: "Draw",
                                               message: msg,

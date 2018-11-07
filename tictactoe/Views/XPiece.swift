@@ -23,10 +23,17 @@ class XPiece: UIView {
     func didLoad(){
         
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: self.frame.size.width, y: self.frame.size.height))
-        path.move(to: CGPoint(x: 0, y: self.frame.size.height))
-        path.addLine(to: CGPoint(x: self.frame.size.width, y: 0))
+        path.move(to: CGPoint(x: 0,
+                              y: 0))
+        
+        path.addLine(to: CGPoint(x: self.frame.size.width,
+                                 y: self.frame.size.height))
+        
+        path.move(to: CGPoint(x: 0,
+                              y: self.frame.size.height))
+        
+        path.addLine(to: CGPoint(x: self.frame.size.width,
+                                 y: 0))
   
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
